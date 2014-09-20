@@ -24,15 +24,14 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'mongoid'
+gem 'mongoid-tree', require: 'mongoid/tree'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+gem 'bower-rails'
+gem 'angular-rails-templates'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
+group :development, :test do
+  gem 'pry'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
