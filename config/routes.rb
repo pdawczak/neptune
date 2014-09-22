@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  root 'application#index'
+
+  get '/api/directories' => 'items#directories'
+
+  get '*path.html' => 'application#index', layout: 0
+  get '*path' => 'application#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

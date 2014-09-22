@@ -1,0 +1,43 @@
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap-sprockets";
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap";
+@import "globals";
+@import "dashboard";
+
+.dir-item {
+  &.ng-enter,
+  &.ng-leave {
+    @include transition(.3s ease-out all);
+  }
+
+  &.ng-enter-stagger,
+  &.ng-leave-stagger {
+    @include transition-delay(.1s);
+    @include animation-delay(.1s);
+  }
+
+  &.ng-enter,
+  &.ng-leave.ng-leave-active {
+    @include opacity(0);
+    @include translate3d(10px, 0, 0)
+  }
+
+  &.ng-leave,
+  &.ng-enter.ng-enter-active {
+    @include opacity(1);
+    @include translate3d(0, 0, 0)
+  }
+}
+
+.navbar-header {
+  padding-left: 25px;
+}
+
+#loading-bar-spinner {
+  top: 15px;
+}
+
+#loading-bar-spinner .spinner-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 25px;
+}
