@@ -6,8 +6,8 @@ class Directory
   validates :name, presence: true
   validates :name, uniqueness: { scope: :parent_id }
 
-  after_create :rebuild_path!
-  after_update :rebuild_path!
+  before_create :rebuild_path!
+  before_update :rebuild_path!
   after_rearrange :rebuild_path!
 
   field :name
@@ -29,11 +29,11 @@ class Directory
     ancestors_and_self - [root]
   end
 
+  private
+
   def rebuild_path!
     self.path = build_path
   end
-
-  private
 
   def build_path
     accessible_ancestors_and_self.collect(&:slug).join('/')

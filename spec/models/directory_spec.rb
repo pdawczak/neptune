@@ -48,8 +48,8 @@ RSpec.describe Directory, :type => :model do
     end
 
     it "properly slugifies name" do
-      new_dir = Directory.create(name: '_$uper.Sample_test')
-      expect(new_dir.slug).to eq '$uper-dot-sample-test'
+      new_dir = Directory.create(name: '_$uper.Sample_test&fun')
+      expect(new_dir.slug).to eq '$uper-dot-sample-test-and-fun'
     end
 
     it "creates different slugs for similarly named directories" do
@@ -69,6 +69,7 @@ RSpec.describe Directory, :type => :model do
     context "when name changed" do
       it "reflects the name change" do
         ice_dir.update_attributes(name: '_tmp')
+        ice_dir.reload
         expect(ice_dir.path).to eq 'tmp'
       end
     end
@@ -76,12 +77,13 @@ RSpec.describe Directory, :type => :model do
     context "for nested directories" do
       let(:sub_dir) { ice_dir.children.create(name: 'sub') }
 
-      it "consists slugs af ancestors" do
+      it "consists slugs of ancestors" do
         expect(sub_dir.path).to eq 'ice/sub'
       end
 
       it "it reflects the ancestor name change in path" do
         ice_dir.update_attributes(name: 'sample_ice')
+        ice_dir.reload
         expect(sub_dir.path).to eq 'sample-ice/sub'
       end
     end
