@@ -15,6 +15,8 @@ class Directory
 
   slug :name
 
+  index({ path: 1 }, { unique: true })
+
   def to_s
     name
   end
