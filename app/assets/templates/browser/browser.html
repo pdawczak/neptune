@@ -1,10 +1,49 @@
 <div class="container-fluid">
-  <div class="col-md-12">
-    <div class="page-header">
-      <h1>
-        <i class="fa fa-hdd-o"></i>
-        Browser
-      </h1>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-header">
+        <h1>
+          <i class="fa fa-hdd-o"></i>
+          Browser
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div id="directory-tree" class="well">
+        <directory-items directories="tree.children">
+        </directory-items>
+      </div>
+    </div>
+<!--
+    <div class="col-md-9">
+      <div ui-view
+        class="directory-content-container">
+      </div>
+    </div>
+-->
+    <div class="col-md-9">
+      <div class="directory-breadcrumbs-wrapper">
+        <div ui-view="directory-breadcrumbs"
+          class="directory-breadcrumbs-container">
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-body directory-content-items">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="directory-content-wrapper">
+                <div ui-view="directory-content"
+                  class="directory-content-container">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

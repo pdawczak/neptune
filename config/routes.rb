@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   root 'application#index'
 
-  get '/api/directories/tree' => 'directories#tree', as: :directory_tree
+  scope 'api' do
+    resources :directories do
+      collection do
+        get :tree
+      end
+    end
+  end
 
   get '*path.html' => 'application#index', layout: 0
   get '*path' => 'application#index'

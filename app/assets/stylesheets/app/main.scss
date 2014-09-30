@@ -2,7 +2,74 @@
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap";
 @import "globals";
 
-.dir-item {
+#directory-tree > .directory-tree-items {
+  padding-left: 0;
+}
+
+.directory-tree-items {
+  padding-left: 25px;
+
+  li {
+    list-style: none;
+  }
+}
+
+.directory-breadcrumbs-wrapper {
+  height: 55px;
+  position: relative;
+  overflow: hidden;
+}
+
+.directory-breadcrumbs-container {
+  &.ng-enter,
+  &.ng-leave {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  &.ng-enter {
+    @include transition(.2s ease-out all .2s);
+  }
+
+  &.ng-leave {
+    @include transition(.2s ease-out all);
+  }
+
+  &.ng-enter,
+  &.ng-leave.ng-leave-active {
+    @include translate3d(0, 55px, 0);
+  }
+
+  &.ng-leave,
+  &.ng-enter.ng-enter-active {
+    @include translate3d(0, 0, 0);
+  }
+}
+
+.directory-breadcrumb-item {
+  padding-right: 5px;
+}
+
+.directory-content-wrapper {
+  position: relative;
+}
+
+.directory-content-container {
+  &.ng-enter {
+    @include transition(.2s ease-out all .2s);
+  }
+
+  &.ng-enter {
+    @include opacity(0);
+  }
+
+  &.ng-enter.ng-enter-active {
+    @include opacity(1);
+  }
+}
+
+.directory-item {
   &.ng-enter,
   &.ng-leave {
     @include transition(.3s ease-out all);

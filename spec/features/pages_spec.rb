@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'Navigating between pages', js: true do
   scenario 'navigating to "browse" page' do
+    create(:root_dir)
     visit '/'
     expect(find('.page-header')).to have_content('Dashboard')
 

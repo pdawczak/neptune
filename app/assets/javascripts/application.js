@@ -14,8 +14,10 @@
 //= require jquery_ujs
 //= require angular
 //= require angular-animate
+//= require angular-resource
 //= require angular-ui-router
 //= require angular-rails-templates
 //= require angular-loading-bar
+//= require angular-recursion
 //= require_tree .
 //= require_tree ../templates
