@@ -9,6 +9,7 @@ RSpec.describe Directory, :type => :model do
   it { is_expected.to respond_to :name }
   it { is_expected.to respond_to :slug }
   it { is_expected.to respond_to :path }
+  it { is_expected.to respond_to :content }
 
   context "with valid attributes" do
     it { is_expected.to be_valid }
@@ -86,6 +87,38 @@ RSpec.describe Directory, :type => :model do
         ice_dir.reload
         expect(sub_dir.path).to eq 'sample-ice/sub'
       end
+    end
+  end
+
+  describe "#content" do
+    let(:directory) { create(:directory, name: 'Test dir') }
+    let(:content)   { directory.content }
+    subject { content }
+
+    def extract_name
+      ->(object) { object.name }
+    end
+
+    context "with parent" do
+      before do
+        directory.parent = create(:directory, name: 'parent')
+      end
+
+      it { expect(content.length).to eq 1 }
+      it { expect(content.map(&extract_name)).to include '..' }
+    end
+
+    context "with children" do
+      before do
+        directory.children = [
+          create(:directory, name: 'Sup-dir'),
+          create(:directory, name: 'Another dir')
+        ]
+      end
+
+      it { expect(content.length).to eq 2 }
+      it { expect(content.map(&extract_name)).to include 'Sup-dir' }
+      it { expect(content.map(&extract_name)).to include 'Another dir' }
     end
   end
 end

@@ -1,9 +1,11 @@
-<div ng-repeat="item in content"
+<div ng-repeat="item in directory.content | orderBy:'name'"
   class="col-lg-2 col-md-3 col-sm-6 directory-breadcrumb-item">
-  <div class="thumbnail">
-    <img src="http://placehold.it/300x300" alt="{{item.name}}" />
-    <div class="caption">
-      {{item.name}}
+  <a ui-sref="browser.browse({ path: item.path })">
+    <div class="thumbnail">
+      <img src="http://placehold.it/300x300" alt="{{item.name}}" />
+      <div class="caption">
+        {{item.name}}
+      </div>
     </div>
-  </div>
+  </a>
 </div>

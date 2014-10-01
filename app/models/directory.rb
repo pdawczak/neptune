@@ -29,6 +29,22 @@ class Directory
     ancestors_and_self - [root]
   end
 
+  def up_dir
+    parent.dup.tap do |up|
+      up.name = '..'
+    end if parent?
+  end
+
+  def up_dir?
+    parent?
+  end
+
+  def content
+    content = []
+    content << up_dir if up_dir?
+    content + children
+  end
+
   private
 
   def rebuild_path!

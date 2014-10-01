@@ -15,6 +15,7 @@ feature 'Directories', js: true do
     end
   end
 
+
   before do
     build_tree
 
@@ -34,18 +35,44 @@ feature 'Directories', js: true do
   scenario 'Rendering breadcrumbs when navigating between directories' do
     breadcrumbs = find('#directory-breadcrumbs')
 
-    expect(breadcrumbs).to have_content ''
+    expect(breadcrumbs).to have_content 'Root'
 
-    click_on 'assets'
-    expect(breadcrumbs).to have_content 'assets'
+    within('#directory-tree') do
+      click_on 'assets'
+      expect(breadcrumbs).to have_content 'assets'
 
-    click_on 'js'
-    expect(breadcrumbs).to have_content 'assets'
-    expect(breadcrumbs).to have_content 'js'
+      click_on 'js'
+      expect(breadcrumbs).to have_content 'assets'
+      expect(breadcrumbs).to have_content 'js'
 
-    click_on 'documents'
-    expect(breadcrumbs).to     have_content 'documents'
-    expect(breadcrumbs).not_to have_content 'assets'
-    expect(breadcrumbs).not_to have_content 'js'
+      click_on 'documents'
+      expect(breadcrumbs).to     have_content 'documents'
+      expect(breadcrumbs).not_to have_content 'assets'
+      expect(breadcrumbs).not_to have_content 'js'
+    end
+  end
+
+  scenario "Navigating between directories via directory content" do
+    content = find('#directory-content')
+
+    within(content) do
+      expect(content).not_to have_content '..'
+      expect(content).to     have_content 'assets'
+      expect(content).to     have_content 'documents'
+      
+      click_on 'assets'
+      expect(content).to     have_content '..'
+      expect(content).to     have_content 'js'
+      expect(content).to     have_content 'css'
+      expect(content).not_to have_content 'assets'
+      expect(content).not_to have_content 'documents'
+
+      click_on '..'
+      expect(content).not_to have_content '..'
+      expect(content).not_to have_content 'js'
+      expect(content).not_to have_content 'css'
+      expect(content).to     have_content 'assets'
+      expect(content).to     have_content 'documents'
+    end
   end
 end
