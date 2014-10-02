@@ -9,6 +9,11 @@ angular
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 
     function ($stateProvider, $urlRouterProvider, $locationProvider) {
+      $urlRouterProvider.when('/browse', '/browse/');
+      $urlRouterProvider.otherwise('/dashboard');
+
+      $locationProvider.html5Mode(true);
+
       $stateProvider
         .state('dashboard', {
           url: '/dashboard',
@@ -64,10 +69,6 @@ angular
           templateUrl: 'browser/directoryContent.html',
           controller: 'DirectoryContentCtrl',
         });
-
-      $urlRouterProvider.otherwise('/dashboard');
-
-      $locationProvider.html5Mode(true);
     }
   ]);
 
