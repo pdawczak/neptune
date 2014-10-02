@@ -1,6 +1,6 @@
 angular.module('neptune')
-  .controller('BrowserCtrl', ['$scope', '$stateParams', 'Directory', 'tree',
-    function ($scope, $stateParams, Directory, tree) {
+  .controller('BrowserCtrl', ['$scope', 'Directory', 'tree',
+    function ($scope, Directory, tree) {
       $scope.tree = tree;
     }
   ]);
