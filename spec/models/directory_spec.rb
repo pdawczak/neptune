@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Directory, :type => :model do
-  let(:root_dir) { create(:root_dir) }
-  let(:ice_dir)  { root_dir.children.create(attributes_for(:ice_dir)) }
+  let(:root_dir)  { create(:root_dir) }
+  let(:ice_dir)   { root_dir.children.create(attributes_for(:ice_dir)) }
+  let(:directory) { create(:directory, name: 'Test dir') }
 
   subject { ice_dir }
 
@@ -10,6 +11,7 @@ RSpec.describe Directory, :type => :model do
   it { is_expected.to respond_to :slug }
   it { is_expected.to respond_to :path }
   it { is_expected.to respond_to :content }
+  it { is_expected.to respond_to :up_dir? }
 
   context "with valid attributes" do
     it { is_expected.to be_valid }
@@ -90,8 +92,23 @@ RSpec.describe Directory, :type => :model do
     end
   end
 
+  describe "#up_dir?" do
+    subject { directory.up_dir? }
+
+    context "when parent is not provided" do
+      it { is_expected.to be_falsy }
+    end
+
+    context "when parent is provided" do
+      before do
+        directory.parent = create(:directory, name: 'Parent')
+      end
+
+      it { is_expected.to be_truthy }
+    end
+  end
+
   describe "#content" do
-    let(:directory) { create(:directory, name: 'Test dir') }
     let(:content)   { directory.content }
     subject { content }
 

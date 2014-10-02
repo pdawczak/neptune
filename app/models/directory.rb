@@ -29,20 +29,16 @@ class Directory
     ancestors_and_self - [root]
   end
 
+  alias_method :up_dir?, :parent?
+
   def up_dir
     parent.dup.tap do |up|
       up.name = '..'
-    end if parent?
-  end
-
-  def up_dir?
-    parent?
+    end if up_dir?
   end
 
   def content
-    content = []
-    content << up_dir if up_dir?
-    content + children
+    ([up_dir] + children).compact
   end
 
   private
