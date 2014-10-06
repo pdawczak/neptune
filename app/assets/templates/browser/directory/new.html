@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title">New Directory</h4>
+</div>
+<div class="modal-body">
+  <form ng-submit="create()" role="form"
+    class="new-directory-form"
+    name="newDirectoryForm">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input id="name" 
+        class="form-control" 
+        type="text" 
+        autofocus
+        ng-model="newDirectory.name"
+        required
+        name="name" />
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-disabled="newDirectoryForm.$invalid" ng-click="create()">Create</button>
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>

@@ -75,4 +75,19 @@ feature 'Directories', js: true do
       expect(content).to     have_content 'documents'
     end
   end
+
+  scenario "creating new directories" do
+    newDirectoryName = 'New Directory'
+
+    content = find('#directory-content')
+    expect(content).not_to have_content newDirectoryName
+
+    find('#new-directory').click
+    within('.new-directory-form') do
+      fill_in 'Name', with: newDirectoryName
+    end
+    click_on 'Create'
+
+    expect(content).to have_content newDirectoryName
+  end
 end

@@ -1,5 +1,6 @@
 angular.module('neptune')
-  .controller('DashboardCtrl', ['$scope', 
+  .controller('DashboardCtrl', [
+    '$scope', 
     function ($scope) {
     }
   ]);
