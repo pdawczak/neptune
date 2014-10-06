@@ -81,7 +81,7 @@ RSpec.describe DirectoriesController, :type => :controller do
     context "to url of non-existing parent directory" do
       it "will return 404" do
         expect {
-        post_new_directory_data 123
+          post_new_directory_data 123
         }.to raise_error(Mongoid::Errors::DocumentNotFound)
       end
     end
