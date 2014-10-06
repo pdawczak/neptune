@@ -2,6 +2,7 @@ angular
   .module('neptune', [
     'ngAnimate', 
     'ui.router', 
+    'ui.bootstrap',
     'templates', 
     'angular-loading-bar',
     'ngResource',
@@ -59,15 +60,18 @@ angular
           views: {
             'directory-breadcrumbs': {
               templateUrl: 'browser/directory/breadcrumbs.html',
-              controller: 'DirectoryContentCtrl'
+              controller: 'DirectoryContentBreadcrumbsCtrl'
+            },
+            'directory-content-heading': {
+              templateUrl: 'browser/directory/heading.html',
+              controller: 'DirectoryContentHeaderCtrl'
             },
             'directory-content': {
               templateUrl: 'browser/directory/content.html',
               controller: 'DirectoryContentCtrl'
             }
           },
-          templateUrl: 'browser/directoryContent.html',
-          controller: 'DirectoryContentCtrl',
+          templateUrl: 'browser/directoryContent.html'
         });
     }
   ]);

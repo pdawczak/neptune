@@ -52,4 +52,38 @@ RSpec.describe DirectoriesController, :type => :controller do
       it { expect(results['content'].size).to eq 1 }
     end
   end
+
+  describe "POST 'create'" do
+    def post_new_directory_data(directory_id)
+      xhr :post, :create, format: :json, directory_id: directory_id, 
+        directory: attributes_for(:directory, name: 'New Directory')
+    end
+
+    context "valid data" do
+      before do
+        @directory = create(:directory, name: 'Sample Directory')
+      end
+
+      let(:directory) { @directory }
+
+      it "creates new Directory" do
+        expect {
+          post_new_directory_data directory.id
+        }.to change(Directory, :count).by(1)
+      end
+
+      it "has parent set" do
+        post_new_directory_data directory.id
+        expect(Directory.last.parent).to eq(directory)
+      end
+    end
+
+    context "to url of non-existing parent directory" do
+      it "will return 404" do
+        expect {
+          post_new_directory_data 123
+        }.to raise_error(Mongoid::Errors::DocumentNotFound)
+      end
+    end
+  end
 end

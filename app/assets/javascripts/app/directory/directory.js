@@ -3,7 +3,8 @@ angular.module('directory')
     function ($resource) {
       return $resource('/api/directories/:directoryId', { directoryId: "@id", format: 'json' },
         {
-          tree: { url: '/api/directories/tree.:format', method: 'GET' }
+          createChild: { url: '/api/directories/:directoryId/directories', method: 'POST' },
+          tree:   { url: '/api/directories/tree.:format', method: 'GET' }
         }
       );
     }

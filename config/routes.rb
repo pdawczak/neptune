@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root 'application#index'
 
   scope 'api' do
-    resources :directories do
+    resources :directories, only: [:show] do
+      resources :directories, only: [:create]
+
       collection do
         get :tree
       end

@@ -16,6 +16,7 @@
 //= require angular-animate
 //= require angular-resource
 //= require angular-ui-router
+//= require angular-bootstrap
 //= require angular-rails-templates
 //= require angular-loading-bar
 //= require angular-recursion
