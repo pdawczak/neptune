@@ -22,10 +22,10 @@ RSpec.describe DirectoriesController, :type => :controller do
 
     it "should generate json with directories" do
       expect(results['name']).to eq "Root"
-      expect(results['children'][0]['name']).to eq "assets"
-      expect(results['children'][1]['name']).to eq "documents"
-      expect(results['children'][0]['children'][0]['name']).to eq "js"
-      expect(results['children'][0]['children'][1]['name']).to eq "css"
+      expect(results['children'].map { |c| c['name'] }).to include "assets"
+      expect(results['children'].map { |c| c['name'] }).to include "documents"
+      expect(results['children'].map { |c| c['children'].map { |c| c['name'] } }.flatten).to include "js"
+      expect(results['children'].map { |c| c['children'].map { |c| c['name'] } }.flatten).to include "css"
     end
   end
 
