@@ -2,10 +2,10 @@ require 'rails_helper'
 
 feature 'Directories', js: true do
   def build_tree
-    create(:root_dir) do |r|
-      r.children  = [
-        build(:assets_dir) do |a|
-          a.children = [
+    create(:root_dir) do |root|
+      root.children  = [
+        build(:assets_dir) do |assets|
+          assets.children = [
             build(:js_dir),
             build(:css_dir)
           ]
@@ -84,7 +84,7 @@ feature 'Directories', js: true do
 
     find('#new-directory').click
     within('.new-directory-form') do
-      fill_in 'Name', with: newDirectoryName
+      fill_in 'Name...', with: newDirectoryName
     end
     click_on 'Create'
 

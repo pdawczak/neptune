@@ -17,6 +17,12 @@ class Directory
 
   index({ path: 1 }, { unique: true })
 
+  class << self
+    def name_available?(directory_id, name)
+      ! where(parent: directory_id, name: name).exists?
+    end
+  end
+
   def to_s
     name
   end

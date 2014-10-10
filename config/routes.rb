@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     resources :directories, only: [:show] do
       resources :directories, only: [:create]
 
+      member do
+        post :name_available
+      end
+
       collection do
         get :tree
       end
