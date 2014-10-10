@@ -86,4 +86,29 @@ RSpec.describe DirectoriesController, :type => :controller do
       end
     end
   end
+
+  describe "POST 'name_available'" do
+    let(:directory)   { create(:directory, name: 'Testing') }
+    let(:sample_name) { 'Sample Name' }
+
+    def make_post_request
+      xhr :post, :name_available, format: :json, id: directory.id, 
+        name: sample_name
+    end
+
+    context "name is not yet taken" do
+      before { make_post_request }
+
+      it { expect(results['is_available']).to be_truthy }
+    end
+
+    context "name is already taken" do
+      before do
+        directory.children.create(name: sample_name)
+        make_post_request
+      end
+
+      it { expect(results['is_available']).to be_falsy }
+    end
+  end
 end

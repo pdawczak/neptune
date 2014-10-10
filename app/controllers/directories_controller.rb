@@ -1,4 +1,6 @@
 class DirectoriesController < ApiController
+  respond_to :json
+
   def tree
     @tree = Directory.root
   end
@@ -10,8 +12,17 @@ class DirectoriesController < ApiController
   def create
     parent = Directory.find params[:directory_id]
     @directory = parent.children.build directory_params
-    @directory.save
-    render 'show', status: 201
+    if @directory.save
+      render 'show', status: 201
+    else
+      render json: @directory.errors, status: :unprocessable_entity
+    end
+  end
+
+  def name_available
+    render json: { 
+      is_available: Directory.name_available?(params[:id], params[:name])
+    }
   end
 
   private 

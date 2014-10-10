@@ -138,4 +138,23 @@ RSpec.describe Directory, :type => :model do
       it { expect(content.map(&extract_name)).to include 'Another dir' }
     end
   end
+
+  describe "#name_available?" do
+    let(:directory) { create(:directory, name: 'Sample') }
+    let(:a_name)    { 'Testing Name' }
+
+    subject { Directory.name_available?(directory.id, a_name) }
+
+    context "when name is available" do
+      it { is_expected.to be_truthy }
+    end
+
+    context "when name is not available" do
+      before do
+        directory.children.create(name: a_name)
+      end
+
+      it { is_expected.to be_falsy }
+    end
+  end
 end

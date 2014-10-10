@@ -3,17 +3,30 @@
 </div>
 <div class="modal-body">
   <form ng-submit="create()" role="form"
-    class="new-directory-form"
+    class="new-directory-form form-horizontal"
     name="newDirectoryForm">
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input id="name" 
-        class="form-control" 
-        type="text" 
-        autofocus
-        ng-model="newDirectory.name"
-        required
-        name="name" />
+    <div class="form-group form-group-lg has-feedback" 
+      ng-class="{'has-error': newDirectoryForm.name.$invalid && newDirectoryForm.name.$dirty && !newDirectoryForm.name.processing, 'has-success': newDirectoryForm.name.$valid && newDirectoryForm.name.$dirty && !newDirectoryForm.name.processing}">
+      <div class="col-sm-12">
+        <input id="name" 
+          class="form-control input-lg" 
+          type="text" 
+          autofocus
+          ng-model="newDirectory.name"
+          required
+          placeholder="Name..."
+          unique-name-in-directory="{{directory}}"
+          name="name" />
+          <span class="fa form-control-feedback"
+            ng-class="{'fa-close': newDirectoryForm.name.$invalid && newDirectoryForm.name.$dirty && !newDirectoryForm.name.processing, 'fa-check': newDirectoryForm.name.$valid && newDirectoryForm.name.$dirty && !newDirectoryForm.name.processing, 'fa-spinner faa-spin animated': newDirectoryForm.name.processing}">
+          </span>
+        <div class="text-danger text-center"
+          style="line-height: 30px">
+          &nbsp;
+          <span ng-show="newDirectoryForm.name.$error.required && newDirectoryForm.name.$dirty">Name is required</span>
+          <span ng-show="newDirectoryForm.name.$error.unique && newDirectoryForm.name.$dirty">This name is already taken</span>
+        </div>
+      </div>
     </div>
   </form>
 </div>
