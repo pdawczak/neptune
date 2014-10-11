@@ -2,6 +2,8 @@
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap";
 @import "globals";
 
+body { padding-top: 50px; }
+
 #directory-tree > .directory-tree-items {
   padding-left: 0;
 }
