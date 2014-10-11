@@ -26,6 +26,7 @@ gem 'spring',        group: :development
 
 gem 'mongoid'
 gem 'mongoid-tree', require: 'mongoid/tree'
+gem 'mongoid_slug'
 
 gem 'bower-rails'
 gem 'angular-rails-templates'

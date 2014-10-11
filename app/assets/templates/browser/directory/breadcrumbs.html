@@ -1,0 +1,12 @@
+<ol class="breadcrumb" id="directory-breadcrumbs">
+  <li ng-repeat="dir in directories"
+    ng-class="{ 'active disabled': $index == (directories.length - 1) }"
+    class="directory-breadcrumb-item">
+    <span ng-if="!$last">
+      <a ui-sref="browser.browse({ path: dir.path })">{{dir.name}}</a>
+    </span>
+    <span ng-if="$last">
+      {{dir.name}}
+    </span>
+  </li>
+</ol>

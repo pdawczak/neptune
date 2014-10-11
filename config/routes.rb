@@ -1,7 +1,19 @@
 Rails.application.routes.draw do
   root 'application#index'
 
-  get '/api/directories' => 'items#directories'
+  scope 'api' do
+    resources :directories, only: [:show] do
+      resources :directories, only: [:create]
+
+      member do
+        post :name_available
+      end
+
+      collection do
+        get :tree
+      end
+    end
+  end
 
   get '*path.html' => 'application#index', layout: 0
   get '*path' => 'application#index'

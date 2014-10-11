@@ -1,0 +1,8 @@
+<li class="directory-item" ui-sref-active-eq="active">
+  <a ui-sref="browser.browse({ path: directory.path })">{{directory.name}}</a>
+  <ul class="directory-tree-items">
+    <directory-item ng-repeat="item in directory.children | orderBy:'name'" 
+      directory="item">
+    </directory-item>
+  </ul>
+</li>

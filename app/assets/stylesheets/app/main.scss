@@ -2,28 +2,126 @@
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap";
 @import "globals";
 
-.dir-item {
+body { padding-top: 50px; }
+
+#directory-tree > .directory-tree-items {
+  padding-left: 0;
+}
+
+.directory-tree-items {
+  padding-left: 25px;
+
+  li {
+    list-style: none;
+  }
+}
+
+.directory-content {
+  .caption {
+    small {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-align: center;
+    }
+  }
+}
+
+.directory-breadcrumbs-wrapper {
+  height: 55px;
+  position: relative;
+  overflow: hidden;
+}
+
+.directory-breadcrumbs-container {
   &.ng-enter,
   &.ng-leave {
-    @include transition(.3s ease-out all);
+    position: absolute;
+    left: 0;
+    right: 0;
   }
 
-  &.ng-enter-stagger,
-  &.ng-leave-stagger {
-    @include transition-delay(.1s);
-    @include animation-delay(.1s);
+  &.ng-enter {
+    @include transition(.2s ease-out all .2s);
+  }
+
+  &.ng-leave {
+    @include transition(.2s ease-out all);
+  }
+
+  &.ng-enter,
+  &.ng-leave.ng-leave-active {
+    @include translate3d(0, 55px, 0);
+  }
+
+  &.ng-leave,
+  &.ng-enter.ng-enter-active {
+    @include translate3d(0, 0, 0);
+  }
+}
+
+.directory-breadcrumb-item {
+  padding-right: 5px;
+}
+
+.directory-content-heading-wrapper {
+  position: relative;
+  height: 22px;
+  line-height: 22px;
+
+  h3 {
+    line-height: inherit;
+  }
+}
+
+.directory-content-panel-heading {
+  overflow: hidden;
+}
+
+.directory-content-heading-container {
+  &.ng-enter,
+  &.ng-leave {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  &.ng-enter {
+    @include transition(.2s ease-out all .2s);
+  }
+
+  &.ng-leave {
+    @include transition(.2s ease-out all);
   }
 
   &.ng-enter,
   &.ng-leave.ng-leave-active {
     @include opacity(0);
-    @include translate3d(10px, 0, 0)
+    @include translate3d(0, -50px, 0)
   }
 
   &.ng-leave,
   &.ng-enter.ng-enter-active {
     @include opacity(1);
     @include translate3d(0, 0, 0)
+  }
+}
+
+.directory-content-wrapper {
+  position: relative;
+}
+
+.directory-content-container {
+  &.ng-enter {
+    @include transition(.2s ease-out all .2s);
+  }
+
+  &.ng-enter {
+    @include opacity(0);
+  }
+
+  &.ng-enter.ng-enter-active {
+    @include opacity(1);
   }
 }
 

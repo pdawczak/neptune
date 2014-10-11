@@ -36,7 +36,9 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
-  config.before(:suite) do
+  config.include FactoryGirl::Syntax::Methods
+
+  config.before(:each) do
     DatabaseCleaner.clean_with :truncation
   end
 
